@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slug Generator — TextUtils.tools</title>
+  <meta name="description" content="Free online slug generator. Convert titles, headings, or any text into clean, SEO-friendly URL slugs instantly.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lordbasilaiassistant-sudo.github.io/textutils-tools/slug-generator.html">
+  <meta property="og:title" content="Slug Generator — TextUtils.tools">
+  <meta property="og:description" content="Free online slug generator. Convert titles, headings, or any text into clean, SEO-friendly URL slugs instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lordbasilaiassistant-sudo.github.io/textutils-tools/slug-generator.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Slug Generator — TextUtils.tools">
+  <meta name="twitter:description" content="Free online slug generator. Convert titles, headings, or any text into clean, SEO-friendly URL slugs instantly.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0F0F1A;
+      color: #E8E8F0;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: #6C63FF; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: #1A1A2E;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .logo { font-size: 1.3rem; font-weight: 700; color: #6C63FF; }
+    nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    nav a { color: #9494A8; font-size: 0.9rem; }
+    nav a:hover, nav a.active { color: #6C63FF; text-decoration: none; }
+    main { flex: 1; width: 100%; max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #9494A8;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    h1 { font-size: 2rem; margin-bottom: 0.3rem; }
+    .tagline { color: #9494A8; margin-bottom: 1.5rem; }
+    .card {
+      background: #1A1A2E;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    textarea, input[type="text"], input[type="number"], select {
+      width: 100%;
+      background: #0F0F1A;
+      color: #E8E8F0;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+    textarea:focus, input:focus { outline: none; border-color: #6C63FF; }
+    button, .btn {
+      display: inline-block;
+      background: #6C63FF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover, .btn:hover { background: #5A52D5; }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #6C63FF;
+      color: #6C63FF;
+    }
+    .btn-outline:hover { background: #6C63FF; color: #fff; }
+    label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem; }
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .row > * { flex: 1; min-width: 0; }
+    .controls { display: flex; gap: 0.75rem; margin: 1rem 0; flex-wrap: wrap; align-items: center; }
+    .output-area {
+      background: #0F0F1A;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 120px;
+      white-space: pre-wrap;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+    .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+    .grid-cards .card { cursor: pointer; transition: transform 0.15s, border-color 0.15s; }
+    .grid-cards .card:hover { transform: translateY(-3px); border-color: #6C63FF; }
+    .grid-cards .card h3 { margin-bottom: 0.3rem; }
+    .grid-cards .card p { color: #9494A8; font-size: 0.9rem; }
+    .diff-add { background: rgba(0,200,83,0.15); color: #66ff99; }
+    .diff-del { background: rgba(255,50,50,0.15); color: #ff6666; }
+    .md-preview { line-height: 1.7; }
+    .md-preview h1,.md-preview h2,.md-preview h3 { margin: 1rem 0 0.5rem; }
+    .md-preview code { background: rgba(255,255,255,0.08); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85em; }
+    .md-preview pre { background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    .md-preview pre code { background: none; padding: 0; }
+    .md-preview blockquote { border-left: 3px solid #6C63FF; padding-left: 1rem; color: #9494A8; }
+    .md-preview ul, .md-preview ol { padding-left: 1.5rem; }
+    .md-preview a { color: #6C63FF; }
+    @media (max-width: 640px) {
+      h1 { font-size: 1.5rem; }
+      .row { flex-direction: column; }
+      header { padding: 0.75rem 1rem; }
+    }
+  </style>
+  
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">TextUtils.tools</a>
+    <nav>
+      <a href="/textutils-tools/lorem-ipsum-generator.html">Lorem Ipsum Generator</a>
+      <a href="/textutils-tools/markdown-preview.html">Markdown Preview</a>
+      <a href="/textutils-tools/text-diff.html">Text Diff Tool</a>
+      <a href="/textutils-tools/slug-generator.html">Slug Generator</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Slug Generator</h1>
+<p class="tagline">Turn any text into a URL-friendly slug</p>
+<div class="card">
+  
+<label for="slug-input">Text to slugify</label>
+<input type="text" id="slug-input" placeholder="My Awesome Blog Post Title!" oninput="makeSlug()">
+<div class="controls">
+  <button onclick="makeSlug()">Generate Slug</button>
+  <button class="btn-outline" onclick="navigator.clipboard.writeText(document.getElementById('slug-output').textContent)">Copy</button>
+</div>
+<div class="output-area" id="slug-output" style="font-size:1.2rem;min-height:50px;display:flex;align-items:center;"></div>
+<script>
+function makeSlug(){
+  const t = document.getElementById('slug-input').value;
+  const slug = t.toLowerCase().trim()
+    .replace(/[^\w\s-]/g,'')
+    .replace(/[\s_]+/g,'-')
+    .replace(/-+/g,'-')
+    .replace(/^-|-$/g,'');
+  document.getElementById('slug-output').textContent = slug || '(type something above)';
+}
+makeSlug();
+</script>
+</div>
+
+  </main>
+  <footer>&copy; 2026 TextUtils.tools. Free tools, no signup required.</footer>
+  
+</body>
+</html>
